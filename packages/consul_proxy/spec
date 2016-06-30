@@ -1,0 +1,8 @@
+---
+name: consul_proxy
+
+dependencies:
+  - golang1.6
+
+files:
+  - consul-proxy/**/*.go

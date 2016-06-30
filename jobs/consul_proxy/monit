@@ -1,0 +1,6 @@
+check process consul_proxy
+  with pidfile /var/vcap/sys/run/consul_proxy/consul_proxy.pid
+  start program "/var/vcap/jobs/consul_proxy/bin/consul_proxy_ctl start"
+    as uid vcap and gid vcap with timeout 60 seconds
+  stop program "/var/vcap/jobs/consul_proxy/bin/consul_proxy_ctl stop"
+  group vcap

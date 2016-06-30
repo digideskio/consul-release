@@ -1,0 +1,65 @@
+#!/bin/bash -exu
+
+SCRIPT_NAME=$(basename ${0})
+RUN_DIR=/var/vcap/sys/run/consul_proxy
+PIDFILE=${RUN_DIR}/consul_proxy.pid
+WORK_DIR=/var/vcap/store/consul_proxy
+LOG_DIR=/var/vcap/sys/log/consul_proxy
+ETCD_COMMON_DIR=/var/vcap/packages/consul-common
+CERTS_DIR=/var/vcap/jobs/consul_proxy/certs
+
+function setup() {
+  set +xu
+  source "${ETCD_COMMON_DIR}/utils.sh"
+  set -xu
+
+  mkdir -p ${RUN_DIR}
+
+  exec > >(tee -a >(logger -p user.info -t vcap.${SCRIPT_NAME}.stdout) | awk -W interactive '{lineWithDate="echo [`date +\"%Y-%m-%d %H:%M:%S%z\"`] \"" $0 "\""; system(lineWithDate)  }' >> ${LOG_DIR}/${SCRIPT_NAME}.log)
+  exec 2> >(tee -a >(logger -p user.error -t vcap.${SCRIPT_NAME}.stderr) | awk -W interactive '{lineWithDate="echo [`date +\"%Y-%m-%d %H:%M:%S%z\"`] \"" $0 "\""; system(lineWithDate)  }' >> ${LOG_DIR}/${SCRIPT_NAME}.err.log)
+}
+
+function create_cert_files() {
+  echo -n '<%= p("consul_proxy.consul.ca_cert") %>' > "${CERTS_DIR}/ca.crt"
+  echo -n '<%= p("consul_proxy.consul.agent_cert") %>' > "${CERTS_DIR}/agent.crt"
+  echo -n '<%= p("consul_proxy.consul.agent_key") %>' > "${CERTS_DIR}/agent.key"
+}
+
+function start_consul_proxy() {
+  local sec_flags
+  sec_flags=""
+
+  <% if p("consul_proxy.require_ssl") %>
+  create_cert_files
+  sec_flags=" \
+  -require-ssl \
+  -cacert=${CERTS_DIR}/ca.crt \
+  -cert=${CERTS_DIR}/agent.crt \
+  -key=${CERTS_DIR}/agent.key"
+  <% end %>
+
+  /var/vcap/packages/consul_proxy/bin/consul-proxy ${sec_flags} \
+  -consul-url=<%= p("consul_proxy.consul.url") %> \
+  -port=<%= p("consul_proxy.port") %> \
+  1> >(tee -a ${LOG_DIR}/consul_proxy.stdout.log | logger -p user.info -t vcap.consul_proxy) \
+  2> >(tee -a ${LOG_DIR}/consul_proxy.stderr.log | logger -p user.error -t vcap.consul_proxy) &
+
+  echo ${!} > "${PIDFILE}"
+}
+
+setup
+
+case ${1} in
+  start)
+  pid_guard ${PIDFILE} "consul_proxy"
+  start_consul_proxy
+  ;;
+
+  stop)
+  kill_and_wait ${PIDFILE}
+  ;;
+
+  *)
+  echo "Usage: ctl {start|stop}"
+  ;;
+esac

@@ -1,0 +1,36 @@
+---
+name: consul_proxy
+
+description: "consul http proxy server"
+
+templates:
+  consul_proxy_ctl.erb: bin/consul_proxy_ctl
+  pre-start.erb: bin/pre-start
+
+packages:
+  - consul-common
+  - consul_proxy
+
+properties:
+  consul_proxy.consul.url:
+    description: "fully qualified url of consul server to instrument"
+
+  consul_proxy.consul.ca_cert:
+    description: "consul ca certificate"
+    default: ""
+
+  consul_proxy.consul.agent_cert:
+    description: "consul agent certificate"
+    default: ""
+
+  consul_proxy.consul.agent_key:
+    description: "consul agent key"
+    default: ""
+
+  consul_proxy.require_ssl:
+    description: "require TLS communication to the remote consul server"
+    default: false
+
+  consul_proxy.port:
+    description: "port of proxy server"
+    default: 8500
