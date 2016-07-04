@@ -5,15 +5,15 @@ mkdir -p /tmp/go
 export GOPATH=/tmp/go
 export GOROOT=$(readlink -nf /var/vcap/packages/golang1.6)
 
-mkdir -p "${BOSH_INSTALL_TARGET}/src/github.com/cloudfoundry-incubator/consul-release/src/consul-proxy"
+mkdir -p "${BOSH_INSTALL_TARGET}/src/github.com/springernature/consul-release/src/consul-proxy"
 
-cp -R ${PWD}/consul-proxy/* "${BOSH_INSTALL_TARGET}/src/github.com/cloudfoundry-incubator/consul-release/src/consul-proxy"
+cp -R ${PWD}/consul-proxy/* "${BOSH_INSTALL_TARGET}/src/github.com/springernature/consul-release/src/consul-proxy"
 
 export GOROOT="$(readlink -nf /var/vcap/packages/golang1.6)"
 export GOPATH="${BOSH_INSTALL_TARGET}"
 export PATH="${GOROOT}/bin:${PATH}"
 export GO15VENDOREXPERIMENT=1
 
-go install "github.com/cloudfoundry-incubator/consul-release/src/consul-proxy"
+go install "github.com/springernature/consul-release/src/consul-proxy"
 
 chown vcap:vcap "${BOSH_INSTALL_TARGET}/bin/consul-proxy"

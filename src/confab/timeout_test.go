@@ -3,7 +3,7 @@ package confab_test
 import (
 	"time"
 
-	"github.com/cloudfoundry-incubator/consul-release/src/confab"
+	"github.com/springernature/consul-release/src/confab"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

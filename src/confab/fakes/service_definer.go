@@ -1,6 +1,6 @@
 package fakes
 
-import "github.com/cloudfoundry-incubator/consul-release/src/confab/config"
+import "github.com/springernature/consul-release/src/confab/config"
 
 type ServiceDefiner struct {
 	GenerateDefinitionsCall struct {

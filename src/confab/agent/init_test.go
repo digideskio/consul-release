@@ -11,7 +11,7 @@ import (
 	"syscall"
 	"testing"
 
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/agent"
+	"github.com/springernature/consul-release/src/confab/agent"
 	"github.com/onsi/gomega/gexec"
 
 	. "github.com/onsi/ginkgo"
@@ -29,7 +29,7 @@ var (
 
 var _ = BeforeSuite(func() {
 	var err error
-	pathToFakeProcess, err = gexec.Build("github.com/cloudfoundry-incubator/consul-release/src/confab/fakes/process")
+	pathToFakeProcess, err = gexec.Build("github.com/springernature/consul-release/src/confab/fakes/process")
 	Expect(err).NotTo(HaveOccurred())
 })
 

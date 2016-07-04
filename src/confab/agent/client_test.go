@@ -3,8 +3,8 @@ package agent_test
 import (
 	"errors"
 
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/agent"
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/fakes"
+	"github.com/springernature/consul-release/src/confab/agent"
+	"github.com/springernature/consul-release/src/confab/fakes"
 	"github.com/hashicorp/consul/api"
 	"github.com/pivotal-golang/lager"
 

@@ -1,8 +1,8 @@
 package chaperon
 
 import (
-	"github.com/cloudfoundry-incubator/consul-release/src/confab"
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/config"
+	"github.com/springernature/consul-release/src/confab"
+	"github.com/springernature/consul-release/src/confab/config"
 )
 
 type Client struct {

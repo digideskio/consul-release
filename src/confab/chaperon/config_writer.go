@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/config"
+	"github.com/springernature/consul-release/src/confab/config"
 	"github.com/pivotal-golang/lager"
 )
 

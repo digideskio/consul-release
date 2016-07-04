@@ -3,9 +3,9 @@ package chaperon_test
 import (
 	"errors"
 
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/chaperon"
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/config"
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/fakes"
+	"github.com/springernature/consul-release/src/confab/chaperon"
+	"github.com/springernature/consul-release/src/confab/config"
+	"github.com/springernature/consul-release/src/confab/fakes"
 	consulagent "github.com/hashicorp/consul/command/agent"
 
 	. "github.com/onsi/ginkgo"

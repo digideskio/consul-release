@@ -1,7 +1,7 @@
 package config_test
 
 import (
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/config"
+	"github.com/springernature/consul-release/src/confab/config"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

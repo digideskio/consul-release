@@ -1,6 +1,6 @@
 package fakes
 
-import "github.com/cloudfoundry-incubator/consul-release/src/confab/agent"
+import "github.com/springernature/consul-release/src/confab/agent"
 
 type AgentClient struct {
 	VerifyJoinedCalls struct {

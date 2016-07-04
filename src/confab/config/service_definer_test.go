@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/config"
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/fakes"
+	"github.com/springernature/consul-release/src/confab/config"
+	"github.com/springernature/consul-release/src/confab/fakes"
 	"github.com/pivotal-golang/lager"
 
 	. "github.com/onsi/ginkgo"

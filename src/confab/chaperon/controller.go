@@ -4,9 +4,9 @@ import (
 	"errors"
 	"time"
 
-	"github.com/cloudfoundry-incubator/consul-release/src/confab"
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/agent"
-	"github.com/cloudfoundry-incubator/consul-release/src/confab/config"
+	"github.com/springernature/consul-release/src/confab"
+	"github.com/springernature/consul-release/src/confab/agent"
+	"github.com/springernature/consul-release/src/confab/config"
 	consulagent "github.com/hashicorp/consul/command/agent"
 	"github.com/pivotal-golang/lager"
 )
