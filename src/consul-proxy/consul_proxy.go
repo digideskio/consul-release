@@ -40,7 +40,7 @@ func main() {
 	proxy := httputil.NewSingleHostReverseProxy(proxyUrl)
 	if flags.RequireSSL {
 		proxy.Transport = &http.Transport{
-			TLSAgentConfig: buildTLSConfig(flags.CACertFilePath, flags.CertFilePath, flags.KeyFilePath),
+			TLSClientConfig: buildTLSConfig(flags.CACertFilePath, flags.CertFilePath, flags.KeyFilePath),
 		}
 	}
 
@@ -68,7 +68,7 @@ func buildTLSConfig(caCertFilePath, certFilePath, keyFilePath string) *tls.Confi
 	tlsConfig := &tls.Config{
 		Certificates:       []tls.Certificate{tlsCert},
 		InsecureSkipVerify: false,
-		AgentAuth:          tls.RequireAndVerifyAgentCert,
+		ClientAuth:         tls.RequireAndVerifyClientCert,
 	}
 
 	certBytes, err := ioutil.ReadFile(caCertFilePath)
@@ -82,7 +82,7 @@ func buildTLSConfig(caCertFilePath, certFilePath, keyFilePath string) *tls.Confi
 	}
 
 	tlsConfig.RootCAs = caCertPool
-	tlsConfig.AgentCAs = caCertPool
+	tlsConfig.ClientCAs = caCertPool
 
 	return tlsConfig
 }

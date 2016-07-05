@@ -108,7 +108,7 @@ var _ = Describe("provides an http proxy to a consul cluster", func() {
 			tlsConfig := &tls.Config{
 				Certificates:       []tls.Certificate{tlsCert},
 				InsecureSkipVerify: false,
-				AgentAuth:          tls.RequireAndVerifyAgentCert,
+				ClientAuth:         tls.RequireAndVerifyClientCert,
 			}
 
 			certBytes, err := ioutil.ReadFile(caCertFilePath)
@@ -119,7 +119,7 @@ var _ = Describe("provides an http proxy to a consul cluster", func() {
 			Expect(ok).To(BeTrue())
 
 			tlsConfig.RootCAs = caCertPool
-			tlsConfig.AgentCAs = caCertPool
+			tlsConfig.ClientCAs = caCertPool
 
 			consulServer.TLS = tlsConfig
 
@@ -249,7 +249,7 @@ func makeRequest(method string, url string, body string) (int, string, error) {
 		return 0, "", err
 	}
 
-	response, err := http.DefaultAgent.Do(request)
+	response, err := http.DefaultClient.Do(request)
 	if err != nil {
 		return 0, "", err
 	}
