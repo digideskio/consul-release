@@ -31,6 +31,8 @@ jobs:
     - 10.244.4.6
   resource_pool: consul_z1
   templates:
+#  - name: consul_agent
+#      release: consul
   - name: consul_proxy
     release: consul
   persistent_disk: 1024
@@ -81,9 +83,10 @@ update:
 
 properties:
   consul_proxy:
+    require_ssl: true
     consul:
-      url: http://127.0.0.1:4001
-      machine: http://127.0.0.1:4001
+      url: https://10.244.4.7:8500
+      machine: https://10.244.4.7:8500
 
       ca_cert: |+
         -----BEGIN CERTIFICATE-----
